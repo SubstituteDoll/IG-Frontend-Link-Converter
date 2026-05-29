@@ -11,6 +11,8 @@ void print_syntax_err(void);
 void print_usage_guide(void);
 
 int main(int argc, char **argv) {
+    DEBUG_PRINT("Debug mode executable active.\n");
+
     // Intercept empty execution immediately
     if (argc < 2) {
         print_syntax_err();
@@ -39,8 +41,7 @@ int main(int argc, char **argv) {
         }
     }
 
-    printf("[DEBUG] All syntax guides centered in main.c. Ready to parse further arguments.\n");
-    
+    DEBUG_PRINT("All syntax guides centered in main.c. Ready to parse further arguments.\n");
     return EXIT_SUCCESS;
 }
 
@@ -49,7 +50,7 @@ void print_intro() {
 }
 
 void print_syntax_err(void) {
-    fprintf(stderr, "Syntax Error.\n\n");
+    printf("Syntax Error.\n\n");
 }
 
 void print_usage_guide() {

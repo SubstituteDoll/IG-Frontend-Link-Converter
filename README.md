@@ -27,9 +27,13 @@ This tool is strictly coded and tested for **Linux and POSIX-compliant environme
 ### Quick Start
 
 1. **Build the Program**  
-   Compile the source files using the provided Makefile:
+   Compile the release source files using the provided Makefile:
    ```bash
    make
+   ```
+   *Alternatively, if you are developing or testing and want to enable macro-driven debugging outputs on stderr, compile using the debug target:*
+   ```bash
+   make debug
    ```
 
 2. **Prepare Your Link File**  
