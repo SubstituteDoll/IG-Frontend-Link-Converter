@@ -5,6 +5,13 @@
 
 #define MAX_LINE_LEN 1024
 
+#ifdef DEBUG
+    #define DEBUG_PRINT(fmt, ...) \
+        fprintf(stderr, "[DEBUG] (%s:%s:%d) " fmt, __FILE__, __func__, __LINE__, ##__VA_ARGS__)
+#else
+    #define DEBUG_PRINT(fmt, ...) do {} while (0)
+#endif
+
 typedef struct {
     char *direct_url;
     char *input_file;
