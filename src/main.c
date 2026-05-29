@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
     // Intercept Global Context Help requests
     if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0) {
         print_intro();
-        print_usage_guide(stderr);
+        print_usage_guide(stdout);
         return EXIT_SUCCESS;
     }
 
@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
             // Reject non-file leading flags
             // First argument must either be a direct URL or the file flag
             print_syntax_err();
-            print_usage_guide(stdout);
+            print_usage_guide(stderr);
             return EXIT_FAILURE;
         }
     }
@@ -45,12 +45,12 @@ int main(int argc, char **argv) {
     return EXIT_SUCCESS;
 }
 
-void print_intro() {
-    printf("IGconvert - Alternative Instagram Frontend Link Converter\n\n");
+void print_intro(void) {
+    fprintf(stdout, "IGconvert - Alternative Instagram Frontend Link Converter\n\n");
 }
 
 void print_syntax_err(void) {
-    printf("Syntax Error.\n\n");
+    fprintf(stderr, "Syntax Error.\n\n");
 }
 
 void print_usage_guide(FILE *stream) {
@@ -64,4 +64,3 @@ void print_usage_guide(FILE *stream) {
     fprintf(stream, "  -OP, --output-platform   Specify the target platform to translate links to\n");
     fprintf(stream, "  -f, --from-file          Specify a text file containing batch links to convert\n");
 }
-
