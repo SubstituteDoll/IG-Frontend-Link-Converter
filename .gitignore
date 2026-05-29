@@ -1,0 +1,22 @@
+# Compiled Executables
+IGconvert
+
+# Object Files and Build Artifacts
+src/*.o
+*.o
+*.a
+*.so
+
+# Temporary Work Files and Logs
+*temp.txt
+*.log
+
+# Development / OS Cache Files
+.DS_Store
+Thumbs.db
+
+# Text Editor / IDE Metadata
+.vscode/
+.idea/
+*.swp
+*~
