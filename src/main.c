@@ -24,6 +24,22 @@ int main(int argc, char **argv) {
         print_usage_guide();
         return EXIT_SUCCESS;
     }
+
+    Config config;
+    init_config(&config);
+
+    // Initial validation check for proper single/batch mode entry patterns
+    if (argv[1][0] == '-') {
+        if (strcmp(argv[1], "-f") != 0 && strcmp(argv[1], "--from-file") != 0) {
+            // Reject non-file leading flags
+            // First argument must either be a direct URL or the file flag
+            print_syntax_err();
+            print_usage_guide();
+            return EXIT_FAILURE;
+        }
+    }
+
+    printf("[DEBUG] All syntax guides centered in main.c. Ready to parse further arguments.\n");
     
     return EXIT_SUCCESS;
 }
