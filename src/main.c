@@ -8,7 +8,7 @@ void print_intro(void);
 // Prints syntax error message
 void print_syntax_err(void);
 // Prints syntax guide message
-void print_usage_guide(void);
+void print_usage_guide(FILE *stream);
 
 int main(int argc, char **argv) {
     DEBUG_PRINT("Debug mode executable active.\n");
@@ -16,14 +16,14 @@ int main(int argc, char **argv) {
     // Intercept empty execution immediately
     if (argc < 2) {
         print_syntax_err();
-        print_usage_guide();
+        print_usage_guide(stderr);
         return EXIT_FAILURE;
     }
 
     // Intercept Global Context Help requests
     if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0) {
         print_intro();
-        print_usage_guide();
+        print_usage_guide(stdout);
         return EXIT_SUCCESS;
     }
 
@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
             // Reject non-file leading flags
             // First argument must either be a direct URL or the file flag
             print_syntax_err();
-            print_usage_guide();
+            print_usage_guide(stderr);
             return EXIT_FAILURE;
         }
     }
@@ -45,22 +45,22 @@ int main(int argc, char **argv) {
     return EXIT_SUCCESS;
 }
 
-void print_intro() {
-    printf("IGconvert - Alternative Instagram Frontend Link Converter\n\n");
+void print_intro(void) {
+    fprintf(stdout, "IGconvert - Alternative Instagram Frontend Link Converter\n\n");
 }
 
 void print_syntax_err(void) {
-    printf("Syntax Error.\n\n");
+    fprintf(stderr, "Syntax Error.\n\n");
 }
 
-void print_usage_guide() {
-    printf("Usage:\n");
-    printf("  Single URL Mode (Default):\n");
-    printf("    ./IGconvert [URL] -OP [output_platform]\n\n");
-    printf("  Batch File Mode:\n");
-    printf("    ./IGconvert -f [file_name] -OP [output_platform]\n\n");
-    printf("Options:\n");
-    printf("  -h, --help               Display this help text manual\n");
-    printf("  -OP, --output-platform   Specify the target platform to translate links to\n");
-    printf("  -f, --from-file          Specify a text file containing batch links to convert\n");
+void print_usage_guide(FILE *stream) {
+    fprintf(stream, "Usage:\n");
+    fprintf(stream, "  Single URL Mode (Default):\n");
+    fprintf(stream, "    ./IGconvert [URL] -OP [output_platform]\n\n");
+    fprintf(stream, "  Batch File Mode:\n");
+    fprintf(stream, "    ./IGconvert -f [file_name] -OP [output_platform]\n\n");
+    fprintf(stream, "Options:\n");
+    fprintf(stream, "  -h, --help               Display this help text manual\n");
+    fprintf(stream, "  -OP, --output-platform   Specify the target platform to translate links to\n");
+    fprintf(stream, "  -f, --from-file          Specify a text file containing batch links to convert\n");
 }
